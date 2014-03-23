@@ -7,8 +7,8 @@
 	    <title>Musocracy Player</title>
 
 	    <!-- To fix: Give the CodeIgniter way of finding "base URL" instead of ../../  -->
-		<link href="../../css/main.css"                  rel="stylesheet" type="text/css">
 		<link href="../../css/bootstrap311/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../../css/main.css"                  rel="stylesheet" type="text/css">
 
 		<!-- Jquery - Loaded early -->
 		<script src="http://code.jquery.com/jquery.js"></script>
