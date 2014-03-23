@@ -96,7 +96,9 @@ class Auth extends CI_Controller
 					$data['captcha_html'] = $this->_create_captcha();
 				}
 			}
+			$this->load->view('header');
 			$this->load->view('auth/login_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -256,7 +258,9 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
+			$this->load->view('header');
 			$this->load->view('auth/register_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -292,7 +296,9 @@ class Auth extends CI_Controller
 			}
 			
 			$data['logout_link'] = site_url().'auth/logout';
+			$this->load->view('header');
 			$this->load->view('auth/send_again_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -354,7 +360,9 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('header');
 			$this->load->view('auth/forgot_password_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -400,7 +408,9 @@ class Auth extends CI_Controller
 				$this->tank_auth->notice('password-failed');
 			}
 		}
+		$this->load->view('header');
 		$this->load->view('auth/reset_password_form', $data);
+		$this->load->view('footer');
 	}
 
 	/**
@@ -432,7 +442,9 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('header');
 			$this->load->view('auth/change_password_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -469,7 +481,9 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('header');
 			$this->load->view('auth/change_email_form', $data);
+			$this->load->view('footer');
 		}
 	}
 
@@ -521,7 +535,9 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('header');
 			$this->load->view('auth/unregister_form', $data);
+			$this->load->view('footer');
 		}
 	}
 	

@@ -1,4 +1,4 @@
-<?php
+s<?php
 $password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
