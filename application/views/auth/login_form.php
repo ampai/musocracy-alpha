@@ -5,6 +5,9 @@ $login = array(
 	'value' => set_value('login'),
 	'maxlength'	=> 80,
 	'size'	=> 30,
+	'type' => 'text',
+	'class' => 'form-control input-sm',
+	'placeholder' => 'Email or Login',
 );
 if ($login_by_username AND $login_by_email) {
 	$login_label = 'Email or login';
@@ -17,6 +20,9 @@ $password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
 	'size'	=> 30,
+	'type' => 'password',
+	'class' => 'form-control input-sm',
+	'placeholder' => 'Password',
 );
 $remember = array(
 	'name'	=> 'remember',
@@ -31,60 +37,88 @@ $captcha = array(
 	'maxlength'	=> 8,
 );
 ?>
-<?php echo form_open($this->uri->uri_string()); ?>
-<table>
-	<tr>
-		<td><?php echo form_label($login_label, $login['id']); ?></td>
-		<td><?php echo form_input($login); ?></td>
-		<td style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']])?$errors[$login['name']]:''; ?></td>
-	</tr>
-	<tr>
-		<td><?php echo form_label('Password', $password['id']); ?></td>
-		<td><?php echo form_password($password); ?></td>
-		<td style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']])?$errors[$password['name']]:''; ?></td>
-	</tr>
+<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please login <small>It's quick!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<!-- <form role="form"> -->
+			    		<?php echo form_open($this->uri->uri_string()); ?>
+			    			<div class="row">
+			    				<!-- Username -->
+			    				<div class="col-xs-6 col-sm-6 col-md-8">
+			    					<div class="form-group">
+			    						<?php echo form_input($login); ?>
+			    						
+			                			<!-- <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="$login_label"> -->
+			    					</div>
+			    				</div>
 
-	<?php if($show_captcha) : if($use_recaptcha) : ?>
-	<tr>
-		<td colspan="2">
-			<div id="recaptcha_image"></div>
-		</td>
-		<td>
-			<a href="javascript:Recaptcha.reload()">Get another CAPTCHA</a>
-			<div class="recaptcha_only_if_image"><a href="javascript:Recaptcha.switch_type('audio')">Get an audio CAPTCHA</a></div>
-			<div class="recaptcha_only_if_audio"><a href="javascript:Recaptcha.switch_type('image')">Get an image CAPTCHA</a></div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="recaptcha_only_if_image">Enter the words above</div>
-			<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
-		</td>
-		<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
-		<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
-		<?php echo $recaptcha_html; ?>
-	</tr>
-	<?php else : ?>
-	<tr>
-		<td>&nbsp;</td>
-		<td>
-			<p>
-				Write the following word:<br>
-				<img src="<?php echo $captcha_html; ?>" id="captcha" /><br />
-			<a class="small" href="javascript:void(0)" onclick="document.getElementById('captcha').src='<?php echo site_url(); ?>captcha/captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image">Not readable? Change text.</a><br/><br/><input type="text" name="captcha" id="captcha-form" autocomplete="off" /></p>
-		</td>
-		<td style="color: red;"><?php echo form_error('captcha'); ?><?php echo isset($errors['captcha']) ? $errors['captcha'] : ''; ?></td>
-	</tr>
-	<?php endif; endif; ?>
+			    				<div class="col-xs-3 col-sm-3 col-md-3">
+			    					
+			    					<!-- Error -->
+			    						<span class="label label-warning"><?php echo isset($errors[$login['name']])?$errors[$login['name']]:''; ?></span>
+			    						
+			    				</div>
+			    				<!-- <div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+			    					</div>
+			    				</div> -->
+			    			</div>
 
-	<tr>
-		<td colspan="3">
-			<?php echo form_checkbox($remember); ?>
-			<?php echo form_label('Remember me', $remember['id']); ?>
-			<?php echo anchor('/auth/forgot_password/', 'Forgot password'); ?>
-			<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register'); ?>
-		</td>
-	</tr>
-</table>
-<?php echo form_submit('submit', 'Let me in'); ?>
-<?php echo form_close(); ?>
+			    			<!-- <div class="form-group">
+			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+			    			</div> -->
+
+			    			<div class="row">
+			    			<!-- Password -->
+			    				<div class="col-xs-6 col-sm-6 col-md-8">
+			    					<div class="form-group">
+			    						<?php echo form_password($password); ?>
+			    						<!-- <span class="label label-warning">Try again!</span> -->
+			    						<!-- <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password"> -->
+			    					</div>
+			    				</div>
+
+			    				<div class="col-xs-3 col-sm-3 col-md-3">
+			    					
+			    					<!-- Error -->
+			    						<span class="label label-warning"><?php echo isset($errors[$password['name']])?$errors[$password['name']]:''; ?></span>
+			    						
+			    				</div>
+			    				<!-- <div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+			    					</div>
+			    				</div> -->
+			    			</div>
+
+			    			<div class="row">
+			    				
+			    				<div class="form-group">
+									<?php echo form_checkbox($remember); ?>
+									<?php echo form_label('Remember me', $remember['id']); ?>
+									
+									
+									 
+			    				</div>
+
+			    			</div>
+			    			<?php $anchor_attribs_reg = array('class' => 'btn btn-success btn-block'); 
+			    				  $anchor_attribs_forgot = array('class' => 'btn btn-default btn-block');
+			    			?>
+
+			    			<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register', $anchor_attribs_reg); ?>
+			    			<input type="submit" value="Sign In" class="btn btn-info btn-block">
+			    			<?php echo anchor('/auth/forgot_password/', 'Forgot password', $anchor_attribs_forgot); ?>
+			    		<?php echo form_close(); ?>
+			    		<!-- </form> -->
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
