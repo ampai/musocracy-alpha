@@ -8,10 +8,7 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+
+
 img/*
-
-css/bootstrap311/*
-css/fonts/*
-
-js/bootstrap311/*
 

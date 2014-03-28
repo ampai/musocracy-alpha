@@ -1,5 +1,5 @@
 Musocracy
-
+---------
 Collaborative playlist building.
 
 Built upon usingCodeIgniter 2.3.2 PHP Framework and the Spotify Web API.
