@@ -17,12 +17,14 @@
          
        </div>
 
-       <div class="mastfoot">
+       <!-- Registration form -->
+
+      <!--  <div class="mastfoot">
          <div class="inner">
           	 <p> <span class="glyphicon glyphicon-wrench"> </span></p>
 		 <p>Stay tuned, we're busy building.</p>
          </div>
-       </div>
+       </div> -->
 
      </div>
 
