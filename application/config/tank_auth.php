@@ -54,7 +54,7 @@ $config['registration_fields'][] = array('category', 'Categories', 'trim|require
 | to your own controller with flashdata to restrict its viewing.
 |--------------------------------------------------------------------------
 */
-$config['login-success'] = 'welcome';
+$config['login-success'] = 'home';
 $config['logout-success'] = FALSE; // Set FALSE for landing page in /views/landing/, '' for home, or 'controller' for your custom controller
 
 /*
