@@ -23,6 +23,34 @@ class Event extends CI_Controller
 		}
 	}
 
+
+	function create_event()
+	{
+		//Creates an event
+		//Check if user creating the event is a host
+		//Validation to make sure event created for present, not past, etc.
+
+	}
+
+
+	function join_event()
+
+	{
+
+		//Add a guest user to the event
+		
+	}
+
+
+
+	function dashboard()
+	{
+		$this->load->view('header');
+		$this->load->view('event/dashboard');
+		$this->load->view('footer');
+
+	}
+
 }
 
 /* End of file event.php */

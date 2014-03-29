@@ -7,8 +7,8 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'Tank Auth';
-$config['webmaster_email'] = 'admin@yoursite.com';
+$config['website_name'] = 'Musocracy';
+$config['webmaster_email'] = 'The Musocracy Team';
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +54,11 @@ $config['registration_fields'][] = array('category', 'Categories', 'trim|require
 | to your own controller with flashdata to restrict its viewing.
 |--------------------------------------------------------------------------
 */
-$config['login-success'] = 'home';
+$config['login-success'] = 'event/dashboard';
 $config['logout-success'] = FALSE; // Set FALSE for landing page in /views/landing/, '' for home, or 'controller' for your custom controller
 
+
+$config['register_redirect'] = 'event/dasbhoard';
 /*
 |--------------------------------------------------------------------------
 | Security settings

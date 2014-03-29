@@ -17,7 +17,7 @@
 		Awesome Speaker Background: Billy Alexander - http://www.sxc.hu/profile/ba1969 
 
      -->
-    <link href="<?php echo base_url("css/stylish-portfolio.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("css/main.css"); ?>" rel="stylesheet">
     <link href="<?php echo base_url("font-awesome/css/font-awesome.min.css"); ?>" rel="stylesheet">
 
     <!-- Jquery - Loaded early -->

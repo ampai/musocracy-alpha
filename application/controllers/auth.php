@@ -97,7 +97,7 @@ class Auth extends CI_Controller
 				}
 			}
 			$this->load->view('header');
-			$this->load->view('auth/login_form', $data);
+			$this->load->view('event/dashboard', $data);
 			$this->load->view('footer');
 		}
 	}
@@ -238,8 +238,9 @@ class Auth extends CI_Controller
 						unset($data['password']); // Clear password (just for any case)
 					}
 					
-					$this->tank_auth->notice('registration-success');
-					
+					// Succesful registration redirect action
+					// $this->tank_auth->notice('registration-success');
+					redirect("auth/login");
 				} else {
 					$errors = $this->tank_auth->get_error_message();
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
