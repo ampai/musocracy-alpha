@@ -97,8 +97,10 @@ class Auth extends CI_Controller
 				}
 			}
 			$this->load->view('header');
-			$this->load->view('event/dashboard', $data);
+			$this->load->view('auth/login_form', $data);
 			$this->load->view('footer');
+
+
 		}
 	}
 

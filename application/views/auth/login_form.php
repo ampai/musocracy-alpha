@@ -45,6 +45,24 @@ $captcha = array(
 			    		<h3 class="panel-title">Please login <small>It's quick!</small></h3>
 			 			</div>
 			 			<div class="panel-body">
+
+			 			<?php 
+			 				// Check to see if we have any flashdata to display
+							$mess = $this->session->flashdata('not_logged_in');
+			 				if (!empty($mess)) {
+			 						
+			 					?>
+									
+			 					<div class="alert alert-warning alert-dismissable">
+			 					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			 					  <strong>Oops!</strong><?php echo $mess; ?>
+			 					</div>
+			 					
+
+			 				
+			 			 <?php }?>
+
+
 			    		<!-- <form role="form"> -->
 			    		<?php echo form_open($this->uri->uri_string()); ?>
 			    			<div class="row">
@@ -98,12 +116,12 @@ $captcha = array(
 			    			</div>
 
 			    			<div class="row">
-			    				
+			    				<div class="col-xs-6 col-sm-6 col-md-8">
 			    				<div class="form-group">
 									<?php echo form_checkbox($remember); ?>
 									<?php echo form_label('Remember me', $remember['id']); ?>
 									
-									
+								</div>
 									 
 			    				</div>
 
@@ -111,9 +129,9 @@ $captcha = array(
 			    			<?php $anchor_attribs_reg = array('class' => 'btn btn-success btn-block'); 
 			    				  $anchor_attribs_forgot = array('class' => 'btn btn-default btn-block');
 			    			?>
-
+							<input type="submit" value="Sign In" class="btn btn-info btn-block">
 			    			<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register', $anchor_attribs_reg); ?>
-			    			<input type="submit" value="Sign In" class="btn btn-info btn-block">
+			    			
 			    			<?php echo anchor('/auth/forgot_password/', 'Forgot password', $anchor_attribs_forgot); ?>
 			    		<?php echo form_close(); ?>
 			    		<!-- </form> -->

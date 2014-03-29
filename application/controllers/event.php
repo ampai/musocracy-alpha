@@ -8,6 +8,11 @@ class Event extends CI_Controller
 		$this->load->library(array('session', 'tank_auth'));
 		$this->load->helper('url');
 
+		if (!$this->tank_auth->is_logged_in()) {
+			$this->session->set_flashdata('not_logged_in', 'You need to be registered to see that!');
+			redirect('/auth/login/');
+		}
+
 	}
 
 	function index()
@@ -45,8 +50,12 @@ class Event extends CI_Controller
 
 	function dashboard()
 	{
+
+		$sess_data = $this->session->all_userdata();
+		$data['user_list'] = $sess_data;
+		$data['test_key'] = "test value";
 		$this->load->view('header');
-		$this->load->view('event/dashboard');
+		$this->load->view('event/dashboard', $data);
 		$this->load->view('footer');
 
 	}
