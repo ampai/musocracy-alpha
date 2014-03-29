@@ -8,8 +8,8 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-applications/config/database.php
-applications/config/config.php
+application/config/database.php
+application/config/config.php
 
 
 img/*
