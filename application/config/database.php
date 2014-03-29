@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'musocracy_app';
-$db['default']['password'] = 'NhceShqWPHmf8pPv';
+$db['default']['username'] = '';
+$db['default']['password'] = '';
 $db['default']['database'] = 'muso';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
