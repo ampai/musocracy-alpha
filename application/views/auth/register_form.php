@@ -79,7 +79,11 @@ $captcha = array(
 			    			</div>
 			    			
 			    			<!-- <input type="submit" value="Register" class="btn btn-info btn-block"> -->
-			    			<?php echo form_submit('register', 'Register', array("class" => "btn btn-info btn-block")); ?>
+			    			
+			    			<?php 
+			    			$submit_form_attrs['value'] = 'Register';
+			    			$submit_form_attrs['class'] = 'btn btn-info btn-block';	
+			    			echo form_submit('register','Register', 'class = btn btn-info btn-block'); ?>
 
 			    		</form>
 			    	</div>

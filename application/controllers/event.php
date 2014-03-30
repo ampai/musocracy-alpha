@@ -32,18 +32,25 @@ class Event extends CI_Controller
 	function create_event()
 	{
 		//Creates an event
-		//Check if user creating the event is a host
+		//Check if user creating the event is a host 
 		//Validation to make sure event created for present, not past, etc.
+
+
 
 	}
 
 
-	function join_event()
+	function join()
 
 	{
-
 		//Add a guest user to the event
+		$this->load->view('header');
 		
+		$this->load->view('modal');
+
+		$this->load->view('footer');
+
+
 	}
 
 

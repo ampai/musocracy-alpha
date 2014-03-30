@@ -36,7 +36,7 @@
             </li>
             <li><a href="<?php echo site_url(); ?>">Home</a></li>
             <li><a href="<?php echo site_url("auth/login"); ?>">Login</a></li>
-           
+            <li><a href="<?php echo site_url("event/dashboard") ?>">Dashboard</a></li>
         </ul>
     </div>
     <!-- /Side Menu -->

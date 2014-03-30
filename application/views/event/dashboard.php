@@ -3,8 +3,8 @@
 	<h1>Dashboard</h1>	
 
 	<p>
-		<?php var_dump($user_list); ?>
-		<?php echo $test_key; ?>
+		<?php print_r($user_list); ?>
+		
 
 	</p>
 </div>
