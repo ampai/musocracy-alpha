@@ -55,7 +55,7 @@ $config['registration_fields'][] = array('category', 'Categories', 'trim|require
 |--------------------------------------------------------------------------
 */
 $config['login-success'] = 'event/dashboard';
-$config['logout-success'] = FALSE; // Set FALSE for landing page in /views/landing/, '' for home, or 'controller' for your custom controller
+$config['logout-success'] = 'home'; // Set FALSE for landing page in /views/landing/, '' for home, or 'controller' for your custom controller
 
 
 $config['register_redirect'] = 'event/dasbhoard';

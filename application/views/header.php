@@ -35,7 +35,25 @@
             <li class="sidebar-brand">Menu
             </li>
             <li><a href="<?php echo site_url(); ?>">Home</a></li>
-            <li><a href="<?php echo site_url("auth/login"); ?>">Login</a></li>
+
+            <?php 
+                //  user is already signed in: show Logout (auth/logout)
+                // user not already signed in: show Login  (auth/login)
+            $auth_action_href = '';
+            $auth_action_text = '';
+            if ($this->tank_auth->is_logged_in()) {
+                $auth_action_href = site_url('auth/logout');
+                $auth_action_text = 'Logout';
+            }else{
+
+                $auth_action_href = site_url('auth/login');
+                $auth_action_text = 'Login';
+            }
+
+             ?>
+            <li><a href=<?php echo $auth_action_href; ?>> <?php echo $auth_action_text;  ?></a></li>
+            
+
             <li><a href="<?php echo site_url("event/dashboard") ?>">Dashboard</a></li>
         </ul>
     </div>
