@@ -15,12 +15,12 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#joinevent">
 	          Join Event
 	        </a>
 	      </h4>
 	    </div>
-	    <div id="collapseOne" class="panel-collapse collapse in">
+	    <div id="joinevent" class="panel-collapse collapse in">
 	      <div class="panel-body">
 	        <!-- Join Event -->
 	        	 <p>You need to know the lobby name and have an access code.</p>
@@ -69,28 +69,79 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#createevent">
 	          Create Event
 	        </a>
 	      </h4>
 	    </div>
-	    <div id="collapseTwo" class="panel-collapse collapse">
+	    <div id="createevent" class="panel-collapse collapse">
 	      <div class="panel-body">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	      	<!-- Event details form -->
+	      		<div class="container">
+	      			<div class="row">
+	      				<div class="col-md-4">
+	      					<div class="form-group">
+	      					   <label for="event_name">Name the event</label>
+	      					   <input type="email" class="form-control" id="event_name" placeholder="Enter name">
+	      					 </div>
+
+	      					 <div class="form-group">
+	      					 	<label for="datetimepicker1">Start time</label>
+	      					    <div class='input-group date' id='datetimepicker1'>
+			                        <input type='text' id="start_time" class="form-control" placeholder="Start time"/>
+			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+			                        </span>
+	      					    </div>
+	      					  </div>
+
+	      					   <div class="form-group">
+	      					 	<label for="datetimepicker1">End time</label>
+	      					    <div class='input-group date' id='datetimepicker2'>
+			                        <input type='text' id="start_time" class="form-control" placeholder="End time"/>
+			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+			                        </span>
+	      					    </div>
+	      					  </div>
+	      					  
+	      					 
+
+	      				</div>
+	      			</div>
+	      		</div>
+
+
+	      	<!-- !event details form -->
 	      </div>
 	    </div>
 	  </div>
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#buildplaylist">
 	          Make a playlist
 	        </a>
 	      </h4>
 	    </div>
-	    <div id="collapseThree" class="panel-collapse collapse">
+	    <div id="buildplaylist" class="panel-collapse collapse">
 	      <div class="panel-body">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+	      	<div class="row">
+	      		<div class="col-md-4">
+	      			<p>Playlist builder page</p>
+	      			<button class="btn btn-primary btn-block">Open playlist builder</button>
+	      			<hr>
+
+	      			<!-- Existing playlists -->
+	      			<p>Playlists</p>
+	      			<table class="table table-striped">
+	      				<thead></thead>
+	      				<tbody></tbody>
+	      				<tfoot></tfoot>
+	      			</table>
+
+	      		</div>
+	      	</div>
+	      	
 	      </div>
 	    </div>
 	  </div>
@@ -100,3 +151,10 @@
 	
 
 </div>
+
+
+ <script type="text/javascript">
+             $(function () {
+                 $('#datetimepicker1').datetimepicker();
+             });
+</script>
