@@ -129,7 +129,8 @@ class Auth extends CI_Controller
 	 */
 	function register()
 	{
-		if ($this->tank_auth->is_logged_in()) {									// logged in
+		if ($this->tank_auth->is_logged_in()) {	
+			$this->session->set_flashdata('already_logged_in', 'You are already logged in!');								// logged in
 			redirect($this->config->item('register_redirect', 'tank_auth'));
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
@@ -261,6 +262,8 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
+
+
 			$this->load->view('header');
 			$this->load->view('auth/register_form', $data);
 			$this->load->view('footer');

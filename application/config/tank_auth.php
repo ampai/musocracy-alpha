@@ -58,7 +58,7 @@ $config['login-success'] = 'event/dashboard';
 $config['logout-success'] = 'home'; // Set FALSE for landing page in /views/landing/, '' for home, or 'controller' for your custom controller
 
 
-$config['register_redirect'] = 'event/dasbhoard';
+$config['register_redirect'] = 'event/dashboard';
 /*
 |--------------------------------------------------------------------------
 | Security settings

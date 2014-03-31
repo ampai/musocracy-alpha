@@ -1,5 +1,24 @@
 <div class="container">
+
+
+	 
 	<div class="row vert-text">
+		
+	 			<?php 
+	 				// Check to see if we have any flashdata to display
+					$mess = $this->session->flashdata('already_logged_in');
+	 				if (!empty($mess)) {
+	 						
+	 					?>
+							
+	 					<div class="alert alert-warning alert-dismissable">
+	 					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	 					  <strong>Oops!</strong><?php echo $mess; ?>
+	 					</div>
+	 					
+
+	 				
+	 			 <?php }?>
 		<h1>
 
 		Welcome
