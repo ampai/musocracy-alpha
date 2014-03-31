@@ -1,35 +1,30 @@
+<!-- Event Dasboard -->
 <div class="container">
-
-
-	 
 	<div class="row vert-text">
 		
-	 			<?php 
-	 				// Check to see if we have any flashdata to display
-					$mess = $this->session->flashdata('already_logged_in');
-	 				if (!empty($mess)) {
-	 						
-	 					?>
-							
-	 					<div class="alert alert-warning alert-dismissable">
-	 					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	 					  <strong>Oops!</strong><?php echo $mess; ?>
-	 					</div>
-	 					
+	<?php 
+	// Check to see if we have any flashdata to display
+	$mess = $this->session->flashdata('already_logged_in');
+	if (!empty($mess)) {
+	?>
 
-	 				
-	 			 <?php }?>
-		<h1>
+	<div class="alert alert-warning alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Oops!</strong><?php echo $mess; ?>
+	</div>
+	<?php }?>
+
+	<h1>
 
 		Welcome
 
 		<small>What do you want to do?</small>
 
-		</h1>	
+	</h1>	
 
 	</div>
 
-	<!-- Options -->
+	<!-- Options accordion -->
 	<div class="panel-group" id="accordion">
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
@@ -102,28 +97,43 @@
 	      					<div class="form-group">
 	      					   <label for="event_name">Name the event</label>
 	      					   <input type="email" class="form-control" id="event_name" placeholder="Enter name">
-	      					 </div>
+	      					</div>
 
-	      					 <div class="form-group">
+	      					<div class="form-group">
 	      					 	<label for="datetimepicker1">Start time</label>
 	      					    <div class='input-group date' id='datetimepicker1'>
 			                        <input type='text' id="start_time" class="form-control" placeholder="Start time"/>
 			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 			                        </span>
 	      					    </div>
-	      					  </div>
+	      					</div>
 
-	      					   <div class="form-group">
+	      					<div class="form-group">
 	      					 	<label for="datetimepicker1">End time</label>
 	      					    <div class='input-group date' id='datetimepicker2'>
 			                        <input type='text' id="start_time" class="form-control" placeholder="End time"/>
 			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 			                        </span>
 	      					    </div>
-	      					  </div>
-	      					  
-	      					 
-
+	      					</div>
+	      					
+	      					<div class="form-group">
+	      						<label for="guestcount">Maximum allowed guests</label>
+	      						<select class="form-control" id="guestcount">
+	      						  <option>1</option>
+	      						  <option>2</option>
+	      						  <option>3</option>
+	      						  <option>4</option>
+	      						  <option>5</option>
+	      						  <option>6</option>
+	      						  <option>7</option>
+	      						  <option>8</option>
+	      						  <option>9</option>
+	      						  <option>10</option>
+	      						</select>
+	      					</div>  
+	      					 	
+	      					<button class="btn btn-success btn-block">Create Event!</button>
 	      				</div>
 	      			</div>
 	      		</div>
@@ -177,3 +187,5 @@
                  $('#datetimepicker1').datetimepicker();
              });
 </script>
+
+<!-- !Event Dashboard -->

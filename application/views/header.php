@@ -32,29 +32,45 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">Menu
-            </li>
+            <li class="sidebar-brand">Menu </li>
             <li><a href="<?php echo site_url(); ?>">Home</a></li>
 
-            <?php 
-                //  user is already signed in: show Logout (auth/logout)
-                // user not already signed in: show Login  (auth/login)
-            $auth_action_href = '';
-            $auth_action_text = '';
-            if ($this->tank_auth->is_logged_in()) {
-                $auth_action_href = site_url('auth/logout');
-                $auth_action_text = 'Logout';
-            }else{
+            <!-- Log in / Log Out -->
+                <?php 
+                    //  user is already signed in: show Logout (auth/logout)
+                    // user not already signed in: show Login  (auth/login)
+                $auth_action_href = '';
+                $auth_action_text = '';
+                if ($this->tank_auth->is_logged_in()) {
+                    $auth_action_href = site_url('auth/logout');
+                    $auth_action_text = 'Logout';
+                }else{
 
-                $auth_action_href = site_url('auth/login');
-                $auth_action_text = 'Login';
-            }
+                    $auth_action_href = site_url('auth/login');
+                    $auth_action_text = 'Login';
+                }
 
-             ?>
+                 ?>
             <li><a href=<?php echo $auth_action_href; ?>> <?php echo $auth_action_text;  ?></a></li>
-            
+             <!-- ! Log in / Log Out -->
 
+             <!-- Link to Dashboard -->
             <li><a href="<?php echo site_url("event/dashboard") ?>">Dashboard</a></li>
+
+
+
+            <!-- On-going event 
+                example:
+
+                    In Event: 
+                    EventName [Leave | Home]
+                        Members: Bob   [options: message | see info | etc]
+                                 Sue   [options: message | see info | etc]
+                                 Tom   [options: message | see info | etc]
+                                 Sally [options: message | see info | etc]
+
+
+            -->
         </ul>
     </div>
     <!-- /Side Menu -->

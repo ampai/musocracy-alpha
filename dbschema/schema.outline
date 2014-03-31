@@ -1,0 +1,31 @@
+event
+	-id
+	-name
+	-access_code
+	-host_id
+	-start
+	-end
+	-max_users
+
+event_guests
+	-id
+	-user_id
+	-event_id
+	-is_online
+
+playlists
+	-id
+	-song_id
+
+songs
+	-id
+	-spotify_uri
+	-soundcloud_uri  (after alpha stuff)
+	-artist
+	-song
+	-album
+
+event_playlists
+	-id
+	-event_id
+	-playlist_id
