@@ -40,8 +40,21 @@
 	        	 <p>You need to know the lobby name and have an access code.</p>
 	        	 <div class="row">
 	        	   <div class="col-xs-3">
-	        	   <input class="form-control" type="text" placeholder="Event Name"></input>
-	        	   <input class="form-control" type="password" placeholder="Access Code"></input>
+	        	   <form action="<?php echo site_url('event/join'); ?>" method="post" name="join_event_form">
+	        	   <select class="form-control" name="selected_event_name">
+	        	   		<?php 
+	        	   			// Populate options based on what's in the $event_names_arr array
+	        	   			// if it's empty, indicate no events were created
+	        	   			foreach ($event_names_arr as $key => $value) {
+	        	   				?>	
+	        	   				<option value=" <?php echo $value; ?>"><?php echo $value; ?></option>
+	        	   				<?php
+	        	   			}
+
+
+	        	   		 ?>
+	        	   </select>
+	        	   <input class="form-control" name="event_access_code" type="text" placeholder="Access Code"></input>
 
 	        	   </div>
 
@@ -52,16 +65,16 @@
 	        	 <!-- Nick or ID select radios -->
 	        	 <div class="row">
 	        	 <div class="col-xs-3">
-	        	   <div class="radio">
-	        	   <label>
-	        	     <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+	        	   <div class="radio" >
+	        	   <label >
+	        	     <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" disabled>
 	        	     Use a nickname
 	        	   </label>
 	        	 </div>
 	        	 <div class="radio">
 	        	   <label>
-	        	     <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-	        	     Use registration name
+	        	     <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>
+	        	     Use your username
 	        	   </label>
 	        	</div>
 
@@ -70,12 +83,13 @@
 
 	        	 <div class="row">
 	        	   <div class="col-xs-3">
-	        	     <button type="button" class="btn btn-success btn-block">Join</button>
+	        	     <button type="submit" class="btn btn-success btn-block">Join</button>
 
 	        	   </div>
 	        	   
 
 	        	 </div>
+	        	</form>
 	        <!-- !Join Event -->
 	      </div>
 	    </div>
@@ -155,7 +169,7 @@
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
 	        <a data-toggle="collapse" data-parent="#accordion" href="#buildplaylist">
-	          Make a playlist
+	          Event History
 	        </a>
 	      </h4>
 	    </div>
@@ -164,12 +178,12 @@
 
 	      	<div class="row">
 	      		<div class="col-md-4">
-	      			<p>Playlist builder page</p>
-	      			<button class="btn btn-primary btn-block">Open playlist builder</button>
+	      			<p>You have currently no hosted events.</p>
+	      			<button class="btn btn-primary btn-block">Options</button>
 	      			<hr>
 
 	      			<!-- Existing playlists -->
-	      			<p>Playlists</p>
+	      			<p>Listing</p>
 	      			<table class="table table-striped">
 	      				<thead></thead>
 	      				<tbody></tbody>

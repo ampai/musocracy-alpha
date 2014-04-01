@@ -96,13 +96,22 @@ class Event extends CI_Controller
 	function join()
 
 	{
-		//Add a guest user to the event
+		//set the session variable that allows a user to be joined after
+		// performing a check to see if event name & access code pairs match up 
+		// other wise redirect user to home page with flashdata OR back to dashboard
+
+		$data['ename'] = $this->input->post('selected_event_name');
+		$data['ecode'] = $this->input->post('event_access_code');
+
+		$allow = $this->Event_model->let_me_in($data['ename'], $data['ecode']);
+		if ($allow) {
+			$data['access'] = "Allowed!";
+		}else{
+			$data['access'] = "Not allowed.";
+		}
 		$this->load->view('header');
-		
-		$this->load->view('modal');
-
+		$this->load->view('lobby/lobby', $data, FALSE);	
 		$this->load->view('footer');
-
 
 	}
 
@@ -114,6 +123,10 @@ class Event extends CI_Controller
 		// get user information
 		$data['curr_username'] = $this->tank_auth->get_username();
 
+
+		// get all event names
+		$data['event_names_arr'] = $this->Event_model->get_all_event_names();
+		
 		$this->load->view('header');
 		$this->load->view('event/dashboard', $data);
 		$this->load->view('footer');
@@ -123,11 +136,11 @@ class Event extends CI_Controller
 
 		$data = "";
 		$this->load->view('header', $data, FALSE);
-		$this->load->view('lobby/lobby', $data, FALSE);
+		$this->load->view('lobby/test_lobby', $data, FALSE);
 		$this->load->view('footer', $data, FALSE);
 	}
 
-	function lobby(){
+	function test_spotify_connection(){
 		//Check if event exists
 		//Check if event is open
 		//Check if user (guest? Host?) is allowed to enter the event

@@ -36,10 +36,42 @@ class Event_model extends CI_Model {
 		return $e_id;
 	}
 
-	function is_joinable_event(){
-		
-		
+	function let_me_in($event_name, $event_code){
+		$ret = false;
+		// check if the code matches the event name, return 
 
+		$query = $this->db->get_where('events', array('name' => $event_name, 'access_code' => $event_code));
+		if ($query->num_rows == 1) {
+			//even if two events have the same name, the access key is unique across all keys
+			// 37^5 possible access keys, need to check distribution of keys to see collisions
+
+			$ret = true; 
+
+		}
+
+		return $ret;
+	}
+
+	function get_all_event_names(){
+		$names_arr = array();
+
+		//Select all names from event_table
+		$this->db->select('name');
+		$this->db->from($this->event_table);
+		$query = $this->db->get();
+
+
+		//populate names_arr with just the party names
+		if ($query->num_rows() > 0) {
+
+			//One or more rows returned
+			foreach ($query->result_array() as $row) {
+				$names_arr[] = $row['name'];
+			}
+
+		}
+		
+		return $names_arr;
 
 	}
 
