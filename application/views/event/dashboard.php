@@ -208,7 +208,7 @@
         	 console.log(JSON.stringify(data.html));
         },
         error: function(data) { 
-        	alert(JSON.stringify(data[html])); }
+        	console.log(JSON.stringify(data)); }
    });
 
 });
