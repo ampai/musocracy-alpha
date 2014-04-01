@@ -120,6 +120,17 @@ class Event extends CI_Controller
 
 	}
 
+
+	function lobby($event_name){
+		//Check if event exists
+		//Check if event is open
+		//Check if user (guest? Host?) is allowed to enter the event
+		$is_host = false;
+		$joinable = false;
+		
+
+	}
+
 }
 
 /* End of file event.php */

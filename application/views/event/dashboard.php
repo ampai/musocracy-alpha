@@ -102,18 +102,18 @@
 			      					</div>
 
 			      					<div class="form-group">
-			      					 	<label for="datetimepicker1">Start time</label>
+			      					 	<label for="datetimepicker1">Starts</label>
 			      					    <div class='input-group date' id='datetimepicker1'>
-					                        <input type='text' id="time_field_start" name="event_time_start" class="form-control" placeholder="Start time"/>
+					                        <input type='text' id="time_field_start" name="event_time_start" class="form-control" placeholder="Start date"/>
 					                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 					                        </span>
 			      					    </div>
 			      					</div>
 
 			      					<div class="form-group">
-			      					 	<label for="datetimepicker2">End time</label>
+			      					 	<label for="datetimepicker2">Ends</label>
 			      					    <div class='input-group date' id='datetimepicker2'>
-					                        <input type='text' id="time_field_end" name="event_time_end" class="form-control" placeholder="End time"/>
+					                        <input type='text' id="time_field_end" name="event_time_end" class="form-control" placeholder="End date"/>
 					                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 					                        </span>
 			      					    </div>

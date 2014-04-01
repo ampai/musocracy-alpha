@@ -27,6 +27,22 @@ class Event_model extends CI_Model {
 		return NULL;
 	}
 
+
+	function get_event_id_from_name($e_name){
+
+
+
+
+		return $id;
+	}
+
+	function is_joinable_event(){
+
+
+
+
+	}
+
 }
 
 /* End of file event.php */
