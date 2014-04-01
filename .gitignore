@@ -11,4 +11,4 @@ application/logs/*
 application/config/database.php
 application/config/config.php
 
-
+dbschema/schema.outline
