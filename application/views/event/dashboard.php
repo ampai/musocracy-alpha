@@ -16,9 +16,9 @@
 
 	<h1>
 
-		Welcome
+		Welcome <?php echo $curr_username; ?>,
 
-		<small>What do you want to do?</small>
+		<small>what do you want to do?</small>
 
 	</h1>	
 
@@ -40,7 +40,7 @@
 	        	 <p>You need to know the lobby name and have an access code.</p>
 	        	 <div class="row">
 	        	   <div class="col-xs-3">
-	        	   <input class="form-control" type="text" placeholder="Lobby Name"></input>
+	        	   <input class="form-control" type="text" placeholder="Event Name"></input>
 	        	   <input class="form-control" type="password" placeholder="Access Code"></input>
 
 	        	   </div>
@@ -90,56 +90,64 @@
 	    </div>
 	    <div id="createevent" class="panel-collapse collapse">
 	      <div class="panel-body">
-	      	<!-- Event details form -->
-	      		<div class="container">
-	      			<div class="row">
-	      				<div class="col-md-4">
-	      					<div class="form-group">
-	      					   <label for="event_name">Name the event</label>
-	      					   <input type="email" class="form-control" id="event_name" placeholder="Enter name">
-	      					</div>
+		      	<div class="event-create-form-hideable">
+			      	<!-- Event details form -->
+			      	<form id="create_event_form" action="" method="POST">
+			      		<div class="container">
+			      			<div class="row">
+			      				<div class="col-md-4">
+			      					<div class="form-group">
+			      					   <label for="event_name">Name the event</label>
+			      					   <input type="text" class="form-control" id="event_name" name="event_name" placeholder="Enter name">
+			      					</div>
 
-	      					<div class="form-group">
-	      					 	<label for="datetimepicker1">Start time</label>
-	      					    <div class='input-group date' id='datetimepicker1'>
-			                        <input type='text' id="start_time" class="form-control" placeholder="Start time"/>
-			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-			                        </span>
-	      					    </div>
-	      					</div>
+			      					<div class="form-group">
+			      					 	<label for="datetimepicker1">Start time</label>
+			      					    <div class='input-group date' id='datetimepicker1'>
+					                        <input type='text' id="time_field_start" name="event_time_start" class="form-control" placeholder="Start time"/>
+					                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+					                        </span>
+			      					    </div>
+			      					</div>
 
-	      					<div class="form-group">
-	      					 	<label for="datetimepicker1">End time</label>
-	      					    <div class='input-group date' id='datetimepicker2'>
-			                        <input type='text' id="start_time" class="form-control" placeholder="End time"/>
-			                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-			                        </span>
-	      					    </div>
-	      					</div>
-	      					
-	      					<div class="form-group">
-	      						<label for="guestcount">Maximum allowed guests</label>
-	      						<select class="form-control" id="guestcount">
-	      						  <option>1</option>
-	      						  <option>2</option>
-	      						  <option>3</option>
-	      						  <option>4</option>
-	      						  <option>5</option>
-	      						  <option>6</option>
-	      						  <option>7</option>
-	      						  <option>8</option>
-	      						  <option>9</option>
-	      						  <option>10</option>
-	      						</select>
-	      					</div>  
-	      					 	
-	      					<button class="btn btn-success btn-block">Create Event!</button>
-	      				</div>
-	      			</div>
-	      		</div>
+			      					<div class="form-group">
+			      					 	<label for="datetimepicker2">End time</label>
+			      					    <div class='input-group date' id='datetimepicker2'>
+					                        <input type='text' id="time_field_end" name="event_time_end" class="form-control" placeholder="End time"/>
+					                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+					                        </span>
+			      					    </div>
+			      					</div>
+			      					
+			      					<div class="form-group">
+			      						<label for="guestcount">Maximum allowed guests</label>
+			      						<select class="form-control" id="guestcount" name="guestcount">
+			      						  <option>1</option>
+			      						  <option>2</option>
+			      						  <option>3</option>
+			      						  <option>4</option>
+			      						  <option>5</option>
+			      						  <option>6</option>
+			      						  <option>7</option>
+			      						  <option>8</option>
+			      						  <option>9</option>
+			      						  <option>10</option>
+			      						</select>
+			      					</div>  
+			      					<input class="btn btn-success btn-block" type="submit" value="Create Event!"> 	
+			
+			      				</div>
+			      			</div>
+			      		</div>
 
+			      	</form>
+			      	<!-- !event details form -->
 
-	      	<!-- !event details form -->
+		    	</div>
+		    	<div class="event-create-ajax-result">
+		    		
+		    	</div>
+	      	
 	      </div>
 	    </div>
 	  </div>
@@ -173,7 +181,7 @@
 	      	
 	      </div>
 	    </div>
-	  </div>
+	    </div>
 	</div>
 
 	<!-- !Options -->
@@ -183,9 +191,37 @@
 
 
  <script type="text/javascript">
-             $(function () {
-                 $('#datetimepicker1').datetimepicker();
-             });
+    $('#create_event_form').submit(function(e) {
+
+    var form = $(this);
+
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: "<?php echo site_url('event/create_event'); ?>",
+        data: form.serialize(), 
+        dataType: 'json',
+        success: function(data){
+        	$('.event-create-form-hideable').hide();
+            $('.event-create-ajax-result').html(data.html);
+        	 console.log(JSON.stringify(data.html));
+        },
+        error: function(data) { 
+        	alert(JSON.stringify(data[html])); }
+   });
+
+});
 </script>
+
+  <script>
+  $(function() {
+    $( "#time_field_start" ).datepicker();
+  });
+
+  $(function() {
+    $( "#time_field_end" ).datepicker();
+  });
+  </script>
 
 <!-- !Event Dashboard -->

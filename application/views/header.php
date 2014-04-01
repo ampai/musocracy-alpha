@@ -20,8 +20,9 @@
     <link href="<?php echo base_url("css/main.css"); ?>" rel="stylesheet">
     <link href="<?php echo base_url("font-awesome/css/font-awesome.min.css"); ?>" rel="stylesheet">
 
-    <!-- Jquery - Loaded early -->
+    <!-- Jquery, UI - Loaded early -->
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	</head>
 
 	<body>
