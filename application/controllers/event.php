@@ -145,7 +145,20 @@ class Event extends CI_Controller
 
 		//get some data about current user
 		$data['host_name'] = $this->tank_auth->get_username();
-		//$data['is_host'] = $this->event_model->is_host($user_id, $event_id);
+		//$data['is_host'] = $this->Event_model->is_host($user_id, $event_id);
+
+		//get event details
+		$lobby_exists = $this->Event_model->get_event_name($event_id);
+		if ($lobby_exists) {
+			$data['event_name'] = $lobby_exists;
+		}else{
+			redirect('event/bad_lobby');
+		}
+		
+
+		//get playlist data
+
+		//get guest list
 
 		$this->load->view('header', $data);	
 		$this->load->view('lobby/lobby', $data);
@@ -160,6 +173,12 @@ class Event extends CI_Controller
 		$this->load->view('header', $data, FALSE);
 		$this->load->view('lobby/test_lobby', $data, FALSE);
 		$this->load->view('footer', $data, FALSE);
+	}
+
+	function bad_lobby(){
+		$this->load->view('header');
+		echo "Sorry - the lobby you tried to join either doesn't exist, is closed, or you provided the wrong access code. Try another lobby!";
+		$this->load->view('footer');
 	}
 
 	function test_spotify_connection(){
@@ -224,7 +243,11 @@ class Event extends CI_Controller
 	}
 
 		
+	function test_ajax_out(){
+		$e_val = $this->input->post('search_q');
+		echo $e_val;
 
+	}
 
 
 }

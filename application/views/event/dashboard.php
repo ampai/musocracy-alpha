@@ -236,22 +236,23 @@
 });
 </script>
 
-<!-- Loading spinner -->
+
+
+    <!-- Loading spinner -->
 <!-- implementation idea thanks to: http://stackoverflow.com/questions/2275342/jquery-ajaxstart-doesnt-get-triggered  -->
 <script type="text/javascript">
-	$(document).ajaxStart(function() {
-	  $('#event-create-area').hide();
-	  $("#spinner").show();
-	});
+    $(document).ajaxStart(function() {
+      $('#event-create-area').hide();
+      $("#spinner").show();
+    });
 
-	$(document).ajaxStop(function() {
-	  $("#spinner").hide();
-	});
+    $(document).ajaxStop(function() {
+      $("#spinner").hide();
+    });
 
 
 
 </script>
-
 
 <!-- !loading spinner -->
   <script>

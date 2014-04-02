@@ -23,9 +23,8 @@
 
 
 
-<script src="<?php echo base_url("js/bootstrap311/bootstrap.min.js"); ?>"></script>
 
-<script>
+    <script>
     $("#menu-close").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
@@ -38,7 +37,19 @@
     });
     </script>
    
+   <!-- !loading spinner -->
+  <script>
+  $(function() {
+    $( "#time_field_start" ).datepicker();
+  });
+
+  $(function() {
+    $( "#time_field_end" ).datepicker();
+  });
+  </script>
     
+
+
 
 
 	</body>

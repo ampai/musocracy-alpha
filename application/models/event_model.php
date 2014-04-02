@@ -36,6 +36,23 @@ class Event_model extends CI_Model {
 		return $e_id;
 	}
 
+
+	function get_event_name($e_id){
+		$e_name = "";
+		$query = $this->db->get_where($this->event_table, array('id' => $e_id));
+
+		if ($query->num_rows() > 0) {
+			// one or more rows returned
+			$res_arr = $query->result_array();
+
+			return $res_arr[0]['name'];
+		}else{
+			return false;
+		}
+
+	}
+
+
 	function let_me_in($event_name, $event_code){
 		$ret = false;
 		// check if the code matches the event name, return 
