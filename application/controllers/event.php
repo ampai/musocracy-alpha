@@ -9,7 +9,7 @@ class Event extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('session', 'tank_auth'));
+		$this->load->library(array('session', 'tank_auth', 'spotify_lib'));
 		$this->load->helper('url');
 
 		if (!$this->tank_auth->is_logged_in()) {
@@ -243,12 +243,28 @@ class Event extends CI_Controller
 	}
 
 		
-	function test_ajax_out(){
-		$e_val = $this->input->post('search_q');
-		echo $e_val;
+	function get_track_search_results(){
+		$track_name = $this->input->post('search_q');
+		$data['max_results'] = 6; //$this->input->post('num_results');
+		// Reach out to Spotify_lib and get search results for track
+		$raw_spotify_out = array();
+		$raw_spotify_out = $this->spotify_lib->searchTrack($track_name);
+		$data['tracks_arr'] = $raw_spotify_out->tracks; 
+
+
+
+		$results_out = $this->load->view('snippets/modal_search_results', $data, true);
+		echo $results_out;
+
+		// var_dump($raw_spotify_out->tracks);
 
 	}
 
+	function test_spotify_out(){
+
+		var_dump($this->spotify_lib->searchTrack('frozen')->tracks[0]);
+
+	}
 
 }
 

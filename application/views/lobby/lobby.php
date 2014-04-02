@@ -49,14 +49,7 @@
 
 			  <!-- List group -->
 			  <ul class="list-group">
-			    <li class="list-group-item">
-			    	Track Info 1 
-
-			    </li>
-			   	<li class="list-group-item">
-			   		Track Info 2
-
-			   	</li>
+			    
 			   	
 
 			  </ul>
@@ -86,17 +79,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="song_add_label">Track Finder</h4>
+        <h4 class="modal-title" id="song_add_label">Track Finder - Select a track to add</h4>
       </div>
       <div class="modal-body">
       	<!-- Search for Track -->
         <input class="text" id="track_name"placeholder="Enter a track name..."></input>
         <button class="btn btn-xs btn-primary" id="find_track">Search</button>
         <!-- Search results area -->
-        <p id="results">
+        	<hr>
+        <div id="results">
         	
 
-        </p>
+        </div>
         	<!-- Loading spinner, hidden by default -->
 			      				<div id="spinner" style="display: none;">
 			      					<img src="<?php echo base_url('img/spinner.gif'); ?>">
@@ -106,7 +100,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Submit Track</button>
+        <button type="button" class="btn btn-primary" disabled>Preview Selected Track</button>
       </div>
     </div>
   </div>
@@ -121,7 +115,7 @@
 		
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url('event/test_ajax_out'); ?>",
+        url: "<?php echo site_url('event/get_track_search_results'); ?>",
          data: {search_q : $('#track_name').val()}, 
         // dataType: 'json',
         success: function(data){
