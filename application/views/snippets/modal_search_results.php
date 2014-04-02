@@ -9,7 +9,7 @@
 		$t_album = $info_object->album->name;
 		$t_uri = $info_object->href;
 		?>
-			<li class="list-group-item"><?php echo $t_name."  /  ".$t_artist."  /  ".$t_album; ?>
+			<li class="list-group-item addable-song"><?php echo $t_name."  /  ".$t_artist."  /  ".$t_album; ?>
 			<input id="hidden_href" type="hidden" value="<?php echo $t_uri; ?>">
 			</li>
 

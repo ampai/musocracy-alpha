@@ -48,7 +48,7 @@
 			  </div> -->
 
 			  <!-- List group -->
-			  <ul class="list-group">
+			  <ul class="list-group" id="playlist-entries-ul">
 			    
 			   	
 
@@ -128,6 +128,38 @@
 	});
 
 </script>
+
+<script type="text/javascript">
+	
+$('body').on('click', '.addable-song', function(){
+	var t_id = $(this).children('input:hidden').val();
+	var curr_event_id = '<?php echo $event_id; ?>';
+	 $.ajax({
+        type: "POST",
+        url: "<?php echo site_url('event/add_song'); ?>",
+         data: {add_uri : t_id, c_event_id : curr_event_id}, 
+         // dataType: 'html',
+        success: function(data){
+        	// Append to the playlist panel
+        	// hide modal
+        	console.log(data);
+        	$('#playlist-entries-ul').append(data);
+
+        	$('#song_add_modal').modal('hide');
+
+        },
+        error: function(data) { 
+        	console.log(JSON.stringify(data)); }
+   });
+
+
+	// $('#song_add_modal').modal('hide');
+
+});
+
+
+</script>
+
 
 
     <!-- Loading spinner -->

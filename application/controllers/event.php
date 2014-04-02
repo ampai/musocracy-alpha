@@ -58,6 +58,9 @@ class Event extends CI_Controller
 				);
 
 			$ins_id = $this->Event_model->create_event($event_data);
+			// need to insert into playlist table an entry
+			// $ins_id_playlist = $this->Event_model->create_playlist($event_id)
+			// returns playlist_id 
 			if (!is_null($ins_id)) {
 				// Insert occured succesfully 
 
@@ -140,6 +143,7 @@ class Event extends CI_Controller
 		//		->build the lobby playlist
 		// 		->fetch the list of guests
 
+
 		//check if joining user is the host, then set the flag in session
 		//	 -> this allow for administrative controls to be enabled for user in lobby home view
 
@@ -151,6 +155,7 @@ class Event extends CI_Controller
 		$lobby_exists = $this->Event_model->get_event_name($event_id);
 		if ($lobby_exists) {
 			$data['event_name'] = $lobby_exists;
+			$data['event_id'] = $event_id;
 		}else{
 			redirect('event/bad_lobby');
 		}
@@ -243,6 +248,9 @@ class Event extends CI_Controller
 	}
 
 		
+
+	//AJAX 
+	// Get track information from search query, send it to modal snippet 
 	function get_track_search_results(){
 		$track_name = $this->input->post('search_q');
 		$data['max_results'] = 6; //$this->input->post('num_results');
@@ -263,6 +271,20 @@ class Event extends CI_Controller
 	function test_spotify_out(){
 
 		var_dump($this->spotify_lib->searchTrack('frozen')->tracks[0]);
+
+	}
+
+	function add_song(){
+		// Need two parameters
+		// event_id and track_id (song_id)
+		$data['spotify_uri'] = $this->input->post('add_uri');
+
+		$spotify_iframe = $this->load->view('snippets/spotify_iframe', $data, true);
+		// $spotify_iframe 	 = '<li class="list-group-item"><iframe src="https://embed.spotify.com/?uri=';
+		// $spotify_iframe 	.= $data['spotify_uri'];
+		// $spotify_iframe		.=  '" width="500" height="80" frameborder="0" allowtransparency="true"></iframe></li>';
+
+		echo $spotify_iframe;
 
 	}
 
