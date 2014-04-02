@@ -92,6 +92,31 @@ class Event_model extends CI_Model {
 
 	}
 
+		function get_all_event_name_id_pairs(){
+		$name_id_pairs = array();
+
+		//Select all names from event_table
+		$this->db->select('name, id');
+		$this->db->from($this->event_table);
+		$query = $this->db->get();
+
+
+		//populate names_arr with just the party names
+		if ($query->num_rows() > 0) {
+
+			//One or more rows returned
+			foreach ($query->result_array() as $row) {
+				$name_id_pairs[$row['name']] = $row['id'];
+
+			}
+
+		}
+		
+		return $name_id_pairs;
+
+	}
+
+
 
 
 }

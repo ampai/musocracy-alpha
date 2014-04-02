@@ -30,7 +30,7 @@
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
 	        <a data-toggle="collapse" data-parent="#accordion" href="#joinevent">
-	          Join Event
+	          Join Private Event
 	        </a>
 	      </h4>
 	    </div>
@@ -177,7 +177,7 @@
 	    <div class="panel-heading">
 	      <h4 class="panel-title">
 	        <a data-toggle="collapse" data-parent="#accordion" href="#buildplaylist">
-	          Event History
+	          Open Events
 	        </a>
 	      </h4>
 	    </div>
@@ -186,17 +186,24 @@
 
 	      	<div class="row">
 	      		<div class="col-md-4">
-	      			<p>You have currently no hosted events.</p>
-	      			<button class="btn btn-primary btn-block">Options</button>
-	      			<hr>
+	      			<div class="list-group">
+	      			  <!-- <div class="panel-heading">Panel heading without title</div> -->
+	      			 
+	      			    
+	      			
 
-	      			<!-- Existing playlists -->
-	      			<p>Listing</p>
-	      			<table class="table table-striped">
-	      				<thead></thead>
-	      				<tbody></tbody>
-	      				<tfoot></tfoot>
-	      			</table>
+
+	      		<?php foreach ($name_id as $key => $value) {
+	      			?>
+
+	      			<a class="list-group-item" href="<?php echo site_url('event/lobby/').'/'.$value; ?>">  <?php echo $key; ?> </a> 
+
+	      			<?php
+
+	      		} ?>
+
+ 						 
+	      			</div>
 
 	      		</div>
 	      	</div>

@@ -26,10 +26,11 @@
 
 				<div class="panel-body">
 
-					<ul>
-						<li>Guest 1</li>
-						<li>Guest 2</li>
-					</ul>
+					<dl>
+						<dt>Host</dt><dd> <h3><?php echo $host_name; ?></h3> </dd>
+				
+
+					</dl>
 					
 
 				</div>

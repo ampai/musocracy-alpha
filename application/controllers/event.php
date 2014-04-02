@@ -63,7 +63,7 @@ class Event extends CI_Controller
 			// returns playlist_id 
 			if (!is_null($ins_id)) {
 				// Insert occured succesfully 
-
+				$event_data['event_id'] = $ins_id;
 				$success_html = $this->load->view('snippets/event_create_success', $event_data, true);
 
 				$return = array(
@@ -129,6 +129,8 @@ class Event extends CI_Controller
 
 		// get all event names
 		$data['event_names_arr'] = $this->Event_model->get_all_event_names();
+
+		$data['name_id'] = $this->Event_model->get_all_event_name_id_pairs();
 		
 		$this->load->view('header');
 		$this->load->view('event/dashboard', $data);
