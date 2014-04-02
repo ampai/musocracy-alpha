@@ -17,7 +17,7 @@ class Event extends CI_Controller
 			redirect('/auth/login/');
 		}
 
-		$this->load->library('form_validation');
+		$this->load->library('form_validation', 'tank_auth');
 		$this->load->model('Event_model');
 
 	}
@@ -49,7 +49,7 @@ class Event extends CI_Controller
 				'id' => NULL,
 				'name' => $this->input->post('event_name'),
 				'access_code' => $this->_generate_access_code(),
-				'host_id' => '666',
+				'host_id' => $this->tank_auth->get_user_id(),
 				'start' => $this->input->post('event_time_start'),
 				'end' => $this->input->post('event_time_end'),
 				'max_users' => $this->input->post('guestcount')
@@ -132,6 +132,28 @@ class Event extends CI_Controller
 		$this->load->view('footer');
 
 	}
+
+
+	function lobby($event_id){
+		//check if lobby exists
+		//	->fetch some lobby details:
+		//		->build the lobby playlist
+		// 		->fetch the list of guests
+
+		//check if joining user is the host, then set the flag in session
+		//	 -> this allow for administrative controls to be enabled for user in lobby home view
+
+		//get some data about current user
+		$data['host_name'] = $this->tank_auth->get_username();
+		//$data['is_host'] = $this->event_model->is_host($user_id, $event_id);
+
+		$this->load->view('header', $data);	
+		$this->load->view('lobby/lobby', $data);
+		$this->load->view('footer');
+
+	}
+
+
 	function test_lobby(){
 
 		$data = "";

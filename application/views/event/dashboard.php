@@ -108,8 +108,8 @@
 			      	<!-- Event details form -->
 			      	<form id="create_event_form" action="" method="POST">
 			      		<div class="container">
-			      			<div class="row">
-			      				<div class="col-md-4">
+			      			<div class="row" >
+			      				<div class="col-md-4" id="event-create-area">
 			      					<div class="form-group">
 			      					   <label for="event_name">Name the event</label>
 			      					   <input type="text" class="form-control" id="event_name" name="event_name" placeholder="Enter name">
@@ -151,6 +151,14 @@
 			      					<input class="btn btn-success btn-block" type="submit" value="Create Event!"> 	
 			
 			      				</div>
+
+			      				<!-- Loading spinner, hidden by default -->
+			      				<div id="spinner" style="display: none;">
+			      					<img src="<?php echo base_url('img/spinner.gif'); ?>">
+
+
+			      				</div>
+
 			      			</div>
 			      		</div>
 
@@ -228,6 +236,24 @@
 });
 </script>
 
+<!-- Loading spinner -->
+<!-- implementation idea thanks to: http://stackoverflow.com/questions/2275342/jquery-ajaxstart-doesnt-get-triggered  -->
+<script type="text/javascript">
+	$(document).ajaxStart(function() {
+	  $('#event-create-area').hide();
+	  $("#spinner").show();
+	});
+
+	$(document).ajaxStop(function() {
+	  $("#spinner").hide();
+	});
+
+
+
+</script>
+
+
+<!-- !loading spinner -->
   <script>
   $(function() {
     $( "#time_field_start" ).datepicker();
@@ -238,4 +264,4 @@
   });
   </script>
 
-<!-- !Event Dashboard -->
+<!-- !Event Dashboard
