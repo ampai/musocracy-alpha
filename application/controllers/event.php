@@ -36,9 +36,7 @@ class Event extends CI_Controller
 
 	function create_event()
 	{
-		//Creates an event
-		//Check if user creating the event is a host 
-		//Validation to make sure event created for present, not past, etc.
+		// AJAX processing for an event
 
 		// If from AJAX, then process, otherwise, do nothing
 		if ($this->input->is_ajax_request()) {
@@ -58,11 +56,10 @@ class Event extends CI_Controller
 				);
 
 			$ins_id = $this->Event_model->create_event($event_data);
-			// need to insert into playlist table an entry
-			// $ins_id_playlist = $this->Event_model->create_playlist($event_id)
-			// returns playlist_id 
+			
 			if (!is_null($ins_id)) {
-				// Insert occured succesfully 
+
+				// Insert occured succesfully, build output to drop into the Create Event section or div
 				$event_data['event_id'] = $ins_id;
 				$success_html = $this->load->view('snippets/event_create_success', $event_data, true);
 
@@ -72,6 +69,13 @@ class Event extends CI_Controller
 					'html' 		=> $success_html
 
 					);
+
+				// Create a default playlist for the event, nothing needs to be shown 
+				// default playlist creates an entry in event_playlists and not playlists table 
+				//	because playlists table requires song_ids to be present, default will be empty...
+				$this->Event_model->create_default_playlist($ins_id);
+
+
 
 			}else{
 
@@ -95,28 +99,28 @@ class Event extends CI_Controller
 
 	}
 
+	// having trouble getting it to work 
+	// function join()
 
-	function join()
+	// {
+	// 	//set the session variable that allows a user to be joined after
+	// 	// performing a check to see if event name & access code pairs match up 
+	// 	// other wise redirect user to home page with flashdata OR back to dashboard
 
-	{
-		//set the session variable that allows a user to be joined after
-		// performing a check to see if event name & access code pairs match up 
-		// other wise redirect user to home page with flashdata OR back to dashboard
+	// 	$data['ename'] = $this->input->post('selected_event_name');
+	// 	$data['ecode'] = $this->input->post('event_access_code');
 
-		$data['ename'] = $this->input->post('selected_event_name');
-		$data['ecode'] = $this->input->post('event_access_code');
+	// 	$allow = $this->Event_model->let_me_in($data['ename'], $data['ecode']);
+	// 	if ($allow) {
+	// 		$data['access'] = "Allowed!";
+	// 	}else{
+	// 		$data['access'] = "Not allowed.";
+	// 	}
+	// 	$this->load->view('header');
+	// 	$this->load->view('lobby/lobby', $data, FALSE);	
+	// 	$this->load->view('footer');
 
-		$allow = $this->Event_model->let_me_in($data['ename'], $data['ecode']);
-		if ($allow) {
-			$data['access'] = "Allowed!";
-		}else{
-			$data['access'] = "Not allowed.";
-		}
-		$this->load->view('header');
-		$this->load->view('lobby/lobby', $data, FALSE);	
-		$this->load->view('footer');
-
-	}
+	// }
 
 
 
@@ -158,12 +162,17 @@ class Event extends CI_Controller
 		if ($lobby_exists) {
 			$data['event_name'] = $lobby_exists;
 			$data['event_id'] = $event_id;
+			$this->session->set_userdata('curr_event_id', $event_id);
 		}else{
-			redirect('event/bad_lobby');
+			$this->session->set_flashdata('bad_lobby_warn', 'Bad Lobby');
+			redirect('event/dashboard');
 		}
 		
 
-		//get playlist data
+		//get playlist data (initial view)
+
+
+
 
 		//get guest list
 
@@ -184,7 +193,8 @@ class Event extends CI_Controller
 
 	function bad_lobby(){
 		$this->load->view('header');
-		echo "Sorry - the lobby you tried to join either doesn't exist, is closed, or you provided the wrong access code. Try another lobby!";
+
+		echo "<h1>Sorry - the lobby you tried to join either doesn't exist, is closed, or you provided the wrong access code. Try another lobby!</h1>";
 		$this->load->view('footer');
 	}
 
@@ -270,15 +280,23 @@ class Event extends CI_Controller
 
 	}
 
-	function test_spotify_out(){
+	function test_spotify_out($track_title = NULL){
 
-		var_dump($this->spotify_lib->searchTrack('frozen')->tracks[0]);
+		if (isset($track_title)) {
+			var_dump($this->spotify_lib->searchTrack($track_title)->tracks[0]);
+		}else{
+
+			var_dump($this->spotify_lib->searchTrack('frozen')->tracks[0]);	
+		}
+		
 
 	}
 
+	// Ajax Method 
 	function add_song(){
 		// Need two parameters
 		// event_id and track_id (song_id)
+
 		$data['spotify_uri'] = $this->input->post('add_uri');
 
 		$spotify_iframe = $this->load->view('snippets/spotify_iframe', $data, true);
@@ -289,6 +307,8 @@ class Event extends CI_Controller
 		echo $spotify_iframe;
 
 	}
+
+
 
 }
 

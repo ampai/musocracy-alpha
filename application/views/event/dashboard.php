@@ -1,10 +1,14 @@
 <!-- Event Dasboard -->
 <div class="container">
 	<div class="row vert-text">
-		
+	
+	<!-- Any flashdata will be inside here -->
 	<?php 
 	// Check to see if we have any flashdata to display
+	// flash data to check for - already_logged_in
+	//						   - bad_lobby_warn 
 	$mess = $this->session->flashdata('already_logged_in');
+	$mess_bad_lobby = $this->session->flashdata('bad_lobby_warn');
 	if (!empty($mess)) {
 	?>
 
@@ -14,6 +18,19 @@
 	</div>
 	<?php }?>
 
+	<?php 
+	//bad_lobby_warn flash data for attempt at bad lobby join
+
+	if (!empty($mess_bad_lobby)) {
+	?>
+
+	<div class="alert alert-warning alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Oops!</strong>You tried to join a lobby which doesn't exist, or you don't have permission to join! Try again!
+	</div>
+	<?php }?>
+
+	<!-- End of possible flashdata -->
 	<h1>
 
 		Welcome <?php echo $curr_username; ?>,

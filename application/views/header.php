@@ -59,7 +59,7 @@
 
              <!-- Link to Dashboard -->
             <li><a href="<?php echo site_url("event/dashboard") ?>">Dashboard</a></li>
-
+            <li>Lobby ID: <?php echo $this->session->userdata('curr_event_id'); ?></li>
 
 
             <!-- On-going event 

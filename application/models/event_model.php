@@ -9,6 +9,10 @@ class Event_model extends CI_Model {
 
 	private $event_table = 'events';
 	private $events_guests_table = 'event_guests';
+	private $event_playlists_table = 'event_playlists';
+
+	private $playlist_table = 'playlist';
+	private $song_table = 'songs';
 
 	/**
 	 * Create new user record
@@ -117,6 +121,21 @@ class Event_model extends CI_Model {
 	}
 
 
+	function create_default_playlist($e_id){
+		if (!isset($e_id)) {
+			return false;
+		}
+		$insert_data = array(
+						'id' 		  => NULL,
+						'event_id' 	  => $e_id,
+						'playlist_id' => $e_id
+							);
+		//inserting an entry into playlist_table with playlist ID the same as event_id
+		$this->db->insert($this->event_playlists_table, $insert_data);
+
+
+
+	}
 
 
 }
