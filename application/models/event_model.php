@@ -121,6 +121,7 @@ class Event_model extends CI_Model {
 	}
 
 
+	// Creates a playlist with the same id as event_id
 	function create_default_playlist($e_id){
 		if (!isset($e_id)) {
 			return false;
@@ -137,6 +138,27 @@ class Event_model extends CI_Model {
 
 	}
 
+
+	// Checks if the provided access code is unique in the events table
+	// Returns: true if unique, false if identical key exists 
+	function check_access_code_uniqueness($to_check){
+		if (!isset($to_check)) {
+				
+			return false;
+		}
+
+		$where_clause = array('access_code' => $to_check);	
+		$query = $this->db->get_where($this->event_table, $where_clause);
+
+		if ($query->num_rows() > 0) {
+			// Access key exists that's already there
+			return false;
+		}else{
+			// Unique 
+			return true; 
+		}
+
+	}
 
 }
 

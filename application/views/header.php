@@ -46,7 +46,7 @@
                 $auth_action_text = '';
                 if ($this->tank_auth->is_logged_in()) {
                     $auth_action_href = site_url('auth/logout');
-                    $auth_action_text = 'Logout';
+                    $auth_action_text = 'Logout';   
                 }else{
 
                     $auth_action_href = site_url('auth/login');
@@ -59,7 +59,15 @@
 
              <!-- Link to Dashboard -->
             <li><a href="<?php echo site_url("event/dashboard") ?>">Dashboard</a></li>
-            <li>Lobby ID: <?php echo $this->session->userdata('curr_event_id'); ?></li>
+
+            <?php 
+
+                $c_event_id = $this->session->userdata('curr_event_id');
+                if (!empty($c_event_id)) {
+                echo " <li>Lobby ID: " . $c_event_id . "</li>";
+                } 
+
+            ?>
 
 
             <!-- On-going event 

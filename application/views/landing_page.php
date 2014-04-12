@@ -16,9 +16,24 @@
     <div id="start" class="intro">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <h2>Create an event to get the party started, or join as a guest if you're already there.</h2>
-                    <p class="lead">It's that easy -- but if you're thinking about hosting, you'll need to <a href="<?php echo site_url("auth/register"); ?>">register</a> with us first.</p>
+                <div class="col-md-5" >
+                    <h2><a href="<?php echo site_url("auth/register"); ?>">Register</a> now and create an event</h2>
+                    <p class="lead">It's that easy -- once you log-in and create the event, your guests will be able to join</p>
+                </div>
+                 <div class="col-md-7" style="padding-left:20px; border-left: 1px solid #ccc;">
+                    <h2>Joining the party?</h2>
+                    <p class="lead">If you have an access code from the host, type it in below and join the fun!</p>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <label for="nickname">Your Name</label>
+                                <input id="nickname" type="text" class="form-control" placeholder="Nickname"> 
+                            <label for="accesscode">Key</label>
+                                <input id="accesscode" type="text" class="form-control" placeholder="Access Code" style="text-transform: uppercase; margin-bottom: 15px;">
+                            <button class="btn btn-success btn-block">Go To Event!</button>
+                        </div>
+                        
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -39,21 +54,21 @@
                     <div class="service-item">
                         <i class="service-icon fa fa-rocket"></i>
                         <h4>Create Event</h4>
-                        <p>Get the ball rolling.</p>
+                        <p>A private lobby for your guests to chat and build playlists</p>
                     </div>
                 </div>
                 <div class="col-md-2 text-center">
                     <div class="service-item">
                         <i class="service-icon fa fa-magnet"></i>
-                        <h4>Join an Event</h4>
-                        <p>Glad you've made it, join in on everyone's fun!</p>
+                        <h4>Real-time voting</h4>
+                        <p>Thanks to cool web technology, everyone is on the same page.</p>
                     </div>
                 </div>
                 <div class="col-md-2 text-center">
                     <div class="service-item">
                         <i class="service-icon fa fa-shield"></i>
-                        <h4>Register</h4>
-                        <p>Registration allows you to weild the throne of the DJ, please have fun.</p>
+                        <h4>Dynamic</h4>
+                        <p>Not just for parties, use Musocracy for any event!</p>
                     </div>
                 </div>
                <!--  <div class="col-md-2 text-center">
@@ -76,12 +91,12 @@
     </div> -->
     <!-- /Callout -->
 
-    <!-- Portfolio -->
-   <!--  <div id="portfolio" class="portfolio">
+    <!-- Technology -->
+    <div id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 text-center">
-                    <h2>Our Work</h2>
+                    <h2>Architecture </h2>
                     <hr>
                 </div>
             </div>
@@ -89,17 +104,17 @@
                 <div class="col-md-4 col-md-offset-2 text-center">
                     <div class="portfolio-item">
                         <a href="#">
-                            <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+                            <img class="img-portfolio img-responsive" src="//placehold.it/200x200">
                         </a>
-                        <h4>Cityscape</h4>
+                        <h4>PHP & CodeIgniter</h4>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="portfolio-item">
                         <a href="#">
-                            <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
+                            <img class="img-portfolio img-responsive" src="//placehold.it/200x200">
                         </a>
-                        <h4>Is That On Fire?</h4>
+                        <h4>Spotify API</h4>
                     </div>
                 </div>
             </div>
@@ -107,23 +122,23 @@
                 <div class="col-md-4 col-md-offset-2 text-center">
                     <div class="portfolio-item">
                         <a href="#">
-                            <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
+                            <img class="img-portfolio img-responsive" src="//placehold.it/200x200">
                         </a>
-                        <h4>Stop Sign</h4>
+                        <h4>Javascript & Backbone</h4>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="portfolio-item">
                         <a href="#">
-                            <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
+                            <img class="img-portfolio img-responsive" src="//placehold.it/200x200">
                         </a>
-                        <h4>Narrow Focus</h4>
+                        <h4>Pusher</h4>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
-    <!-- /Portfolio -->
+    </div>
+    <!-- /Technology -->
 
     <!-- Call to Action -->
     <!-- <div class="call-to-action">

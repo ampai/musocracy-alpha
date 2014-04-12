@@ -255,8 +255,17 @@ class Event extends CI_Controller
 		      $code .= $characters[mt_rand(0, strlen($characters) - 1)];
 		 }
 
+		 // Check to make sure this code does not match any existing codes
+		 if ($this->Event_model->check_access_code_uniqueness($code)) {
+		 	return $code;
+		 }else{
 
-		return $code;
+		 	return $this->_generate_access_code();
+
+		 }
+
+
+		
 	}
 
 		

@@ -13,3 +13,5 @@ application/config/config.php
 application/config/pusher.php
 
 dbschema/schema.outline
+
+misc_tests/*
