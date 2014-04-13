@@ -73,6 +73,14 @@ class Event_model extends CI_Model {
 
 	}
 
+
+	function update_track_vote($e_id,$t_uri){
+
+
+
+	}
+
+
 	function get_event_id_from_name($e_name){
 		$e_id = NULL;
 		

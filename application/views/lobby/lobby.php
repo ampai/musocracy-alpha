@@ -71,7 +71,10 @@
 
 	<!-- Comments area -->
 	<div class="row">
-		
+		<div class="col-md-5 col-md-offset-2" id="#pusher-chat-widget">
+			
+
+		</div>
 
 
 	</div>
@@ -237,5 +240,17 @@
  //        $('#results').show();
  //        $(this).unbind("ajaxStart");
  //    });
+
+</script>
+
+<script type="text/javascript">
+	$('body').on('click', '.btnvoteup', function(){
+		$(this). 
+
+
+	} );
+
+
+
 
 </script>
