@@ -170,9 +170,7 @@ class Event extends CI_Controller
 		
 
 		//get playlist data (initial view)
-
-
-
+		$data['existing_tracks'] = $this->build_playlist_view($event_id);
 
 		//get guest list
 
@@ -183,14 +181,6 @@ class Event extends CI_Controller
 	}
 
 
-	function test_lobby(){
-
-		$data = "";
-		$this->load->view('header', $data, FALSE);
-		$this->load->view('lobby/test_lobby', $data, FALSE);
-		$this->load->view('footer', $data, FALSE);
-	}
-
 	function bad_lobby(){
 		$this->load->view('header');
 
@@ -198,54 +188,6 @@ class Event extends CI_Controller
 		$this->load->view('footer');
 	}
 
-	function test_spotify_connection(){
-		//Check if event exists
-		//Check if event is open
-		//Check if user (guest? Host?) is allowed to enter the event
-		$is_host = false;
-		$joinable = false;
-
-		// STEP 1  Loading the HTML scraping library
-		$this->load->library('scraping');
-
-		// STEP 2 Set spotify MetaData URI 
-		$spotify_metadata_url = "https://ws.spotify.com/search/1/track.json?q=";
-
-
-		// STEP 3 Logic 
-
-		$song_name = $this->input->post('song');
-		// Change spaces in search term into '+' 
-		$song_name = str_replace(" ", "+", $song_name);
-		$song_name = str_replace(" ", "+", $song_name);
-
-		$page = $this->scraping->page($spotify_metadata_url.$song_name);
-	    $json_arr = json_decode($page, true);
-	    
-	    $ret = "";
-
-	    if ($json_arr["info"]["num_results"] < 1) {
-	    	echo "Spotify returned nothing for your query.";
-	    }else{
-	    	$ret .= "<dl class='dl-horizontal'><dt>Title</dt><dd>".$json_arr["tracks"][0]["name"]."</dd>";
-	   	 	$ret .= "<dt>Album</dt><dd>".$json_arr["tracks"][0]["album"]["name"]." (".$json_arr["tracks"][0]["album"]["released"].")</dd>";
-	   		$ret .= "<dt>Track Artist</dt><dd>".$json_arr["tracks"][0]["artists"][0]["name"]."</dd>";
-	   		$ret .= "</dl>";
-	   		if (isset($json_arr["tracks"][0]["href"])) {
-	   			$spotify_track_uri = $json_arr["tracks"][0]["href"];
-	   			$ret .= "<br />";
-	   			$ret .= "<iframe src='https://embed.spotify.com/?uri=spotify:track:".$spotify_track_uri."' width='300' height='80' frameborder='0' allowtransparency='true'></iframe>";
-	   			
-	   		}else{
-
-
-	   		}
-	   		
-		echo $ret."<hr />";
-
-	    }
-
-	}
 
 	function _generate_access_code(){
 		$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -289,6 +231,7 @@ class Event extends CI_Controller
 
 	}
 
+	// TESTTING Function for output based on track search
 	function test_spotify_out($track_title = NULL){
 
 		if (isset($track_title)) {
@@ -301,23 +244,87 @@ class Event extends CI_Controller
 
 	}
 
-	// Ajax Method 
-	function add_song(){
-		// Need two parameters
-		// event_id and track_id (song_id)
+	// TESTING function for output based on URI search
+	function test_spotify_out_uri($track_uri = NULL){
 
-		$data['spotify_uri'] = $this->input->post('add_uri');
+		if (isset($track_uri)) {
+			var_dump($this->spotify_lib->lookup($track_title));
+		}else{
 
-		$spotify_iframe = $this->load->view('snippets/spotify_iframe', $data, true);
-		// $spotify_iframe 	 = '<li class="list-group-item"><iframe src="https://embed.spotify.com/?uri=';
-		// $spotify_iframe 	.= $data['spotify_uri'];
-		// $spotify_iframe		.=  '" width="500" height="80" frameborder="0" allowtransparency="true"></iframe></li>';
-
-		echo $spotify_iframe;
+			var_dump($this->spotify_lib->lookup('spotify:track:1H5tvpoApNDxvxDexoaAUo')->track);	
+		}
+		
 
 	}
 
 
+	// Ajax Method 
+	function add_song(){
+		
+		//retrieve the data submitted to POST by AJAX submit
+		$lookup_uri = $this->input->post('add_uri');
+		$target_event = $this->input->post('c_event_id');
+		
+		// Get full details about this particular track:uri:* 
+		$track_info_obj = $this->spotify_lib->lookup($lookup_uri)->track;
+
+		// Extract relevant details from info_object 
+		$data['track_name'] = !empty($track_info_obj->name) ? $track_info_obj->name : "Unavailable";
+		$data['track_album'] = !empty($track_info_obj->album->name) ? $track_info_obj->album->name : "Unavailable";
+		$data['track_album_date'] = !empty($track_info_obj->album->released) ? $track_info_obj->album->released : "Unavailable";
+		$data['track_artist'] = !empty($track_info_obj->artists[0]->name) ? $track_info_obj->artists[0]->name : "Unavailable";
+		$data['track_uri'] = $lookup_uri;
+		// Persistence
+		// - Add to the event_tracks table [cheating - need to go the song table <-> playlist <-> event_playlist route]
+		$this->Event_model->add_track_to_event($target_event, $data);
+
+		//return formatted list item to append to playlist
+		$track_line_item = $this->load->view('snippets/spotify_mediaobject', $data, true);
+		echo $track_line_item;
+	}
+
+
+
+	function build_playlist_view($event_id = 0, $host_view = false){
+		
+		if ($this->input->is_ajax_request()) {
+			// AJAX request, check for appropriate POST items and set the event_id that way
+			$ajax_event_id = $this->input->post('c_event_id');
+			if (isset($ajax_event_id)) {
+				$event_id = $ajax_event_id;
+			}
+		}
+		//handle it non-AJAX
+		//host checker
+		if ($host_view) {
+			//return a special-host only view?
+		}
+
+		// error checking:  need event_id to figure out which tracks to display
+		if ($event_id == 0) {
+			return '';
+		}
+
+		// Get an array of all tracks from DB for that event 
+		$tracks_arr = $this->Event_model->get_all_event_tracks($event_id);
+		$html_out = '';
+		if ($tracks_arr) {
+			//tracks exist
+			//loop through and build some HTML!
+
+			foreach ($tracks_arr as $track_array_element) {
+				$html_out .= $this->load->view('snippets/spotify_mediaobject', $track_array_element, true);
+			}
+
+			return $html_out;
+		}else{
+			//no tracks exist
+			//skip playlist buildint step
+			return '';
+		}
+		
+
+	}
 
 }
 

@@ -10,12 +10,13 @@ class Event_model extends CI_Model {
 	private $event_table = 'events';
 	private $events_guests_table = 'event_guests';
 	private $event_playlists_table = 'event_playlists';
+	private $event_tracks_table = 'event_tracks';
 
 	private $playlist_table = 'playlist';
 	private $song_table = 'songs';
 
 	/**
-	 * Create new user record
+	 * Create new event record
 	 *
 	 * @param array [name, host_id, start, end, max_guests]
 	 * @return	array
@@ -31,6 +32,46 @@ class Event_model extends CI_Model {
 		return NULL;
 	}
 
+
+	/**
+	 * Create new song record for an event
+	 *
+	 * @param int [event_id]
+	 * @param array [track_name, track_artist, track_ablum, track_album_date, track_uri]
+	 * 
+	 */
+	function add_track_to_event($e_id, $t_data) {
+		if (!isset($e_id) || !isset($t_data)) {
+			return false;
+		}
+		$insert_obj = array(
+			'event_id' => $e_id,
+			'track_name' => $t_data['track_name'],
+			'track_artist' => $t_data['track_artist'],
+			'track_album' => $t_data['track_album'],
+			'track_album_date' => $t_data['track_album_date'],
+			'track_uri' => $t_data['track_uri']
+			);
+
+		$this->db->insert($this->event_tracks_table, $insert_obj);
+
+	}
+
+	function get_all_event_tracks($e_id){
+		if (!isset($e_id)) {
+			return false;
+		}
+
+		$query = $this->db->get_where($this->event_tracks_table, array("event_id" => $e_id));
+
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}else{
+
+			return false;
+		}
+
+	}
 
 	function get_event_id_from_name($e_name){
 		$e_id = NULL;
@@ -96,7 +137,7 @@ class Event_model extends CI_Model {
 
 	}
 
-		function get_all_event_name_id_pairs(){
+	function get_all_event_name_id_pairs(){
 		$name_id_pairs = array();
 
 		//Select all names from event_table

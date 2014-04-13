@@ -289,6 +289,25 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
 
+-- -----------------------------------------------------
+-- Table `event_tracks`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `event_tracks` ;
+
+CREATE  TABLE IF NOT EXISTS `event_tracks` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `event_id` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+  `track_name` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+  `track_artist` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+  `track_album` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+  `track_album_date` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+  `track_uri` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NOT NULL ,
+
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
 
 -- -----------------------------------------------------
 -- Table `songs`
