@@ -239,6 +239,22 @@ i.scroll:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
   }
 
+/* voting style */
+.vote-span{
+  width: 60px;
+  float: right;
+  margin: 5px 0;
+}
+.vote, .vote-score{
+  clear: both;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: center;
+  color: #333;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+.vote-score{cursor: text}
 
 /*
 

@@ -316,11 +316,21 @@ class Event extends CI_Controller
 				$html_out .= $this->load->view('snippets/spotify_mediaobject', $track_array_element, true);
 			}
 
-			return $html_out;
+
+			if ($this->input->is_ajax_request()) {
+				echo $html_out;
+			}else{
+				return $html_out;
+			}
+			
 		}else{
 			//no tracks exist
 			//skip playlist buildint step
-			return '';
+			if ($this->input->is_ajax_request()) {
+				echo "";
+			}else{
+				return "";
+			}
 		}
 		
 
