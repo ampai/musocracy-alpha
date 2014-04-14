@@ -1,5 +1,5 @@
 <li class="list-group-item">
-<span class="badge"> <?php echo 0; ?></span>
+<span class="badge"> <?php echo $ordering; ?></span>
 
 	<div class="media">
 	  <a class="pull-left">
@@ -10,16 +10,16 @@
 	    <p style="margin-bottom: 0;"><strong>Artist: </strong> <?php echo $track_artist; ?>  
 
 
-	    	<button class="btn btn-default btn-xs pull-right btnvoteup"><span class="glyphicon glyphicon-chevron-up pull-right"></span></button>
+	    	<button class="btn btn-default btn-xs pull-right vote" data-action="up"><span class="glyphicon glyphicon-chevron-up pull-right"></span></button>
 	    </p>
 	    <p><strong>Album: </strong><?php echo $track_album . '(' . $track_album_date . ')'; ?> 
 
 	    
-	    <button class="btn btn-default btn-xs pull-right btnvotedown"><span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
+	    <button class="btn btn-default btn-xs pull-right vote" data-action="down"><span class="glyphicon glyphicon-chevron-down pull-right"></span></button>
 
 	    </p>
-	    <!-- Hidden: <?php echo $track_uri; ?> -->
-
+	   
+	    
 	    
 	  </div>
 	
@@ -27,5 +27,5 @@
 
 	</div>
 	
-
+<input type="hidden" name="li_track_uri" value="<?php echo $track_uri; ?>"> 
 </li>

@@ -244,9 +244,34 @@
 </script>
 
 <script type="text/javascript">
-	$('body').on('click', '.btnvoteup', function(){
-		$(this). 
+	$('body').on('click', '.vote', function(){
 
+		// gather data - upvote/downvote? which track? 
+		var self = $(this); 
+		var action = self.data('action');
+		var parent = self.parent().parent().parent().parent();
+		var curr_track_id = $(parent).children('input:hidden').attr('value');
+		var curr_event_id = '<?php echo $event_id; ?>';
+
+		// Send ajax request 
+
+		$.ajax({
+	        type: "POST",
+	        url: "<?php echo site_url('event/process_vote'); ?>",
+	         data: {vote_type : action, c_track_id : curr_track_id, c_event_id : curr_event_id}, 
+	      // dataType: 'html',
+	        success: function(data){
+
+	        	console.log('Submitted '+action+' vote for event,track : '+curr_event_id+','+curr_track_id);
+	        	
+
+	     	},
+
+	        error: function(data) { 
+	        	console.log(JSON.stringify(data)); 
+	        }
+	   	});
+			// console.log('Submitted '+action+' vote for event,track : '+curr_event_id+','+curr_track_id);
 
 	} );
 

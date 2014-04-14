@@ -99,30 +99,6 @@ class Event extends CI_Controller
 
 	}
 
-	// having trouble getting it to work 
-	// function join()
-
-	// {
-	// 	//set the session variable that allows a user to be joined after
-	// 	// performing a check to see if event name & access code pairs match up 
-	// 	// other wise redirect user to home page with flashdata OR back to dashboard
-
-	// 	$data['ename'] = $this->input->post('selected_event_name');
-	// 	$data['ecode'] = $this->input->post('event_access_code');
-
-	// 	$allow = $this->Event_model->let_me_in($data['ename'], $data['ecode']);
-	// 	if ($allow) {
-	// 		$data['access'] = "Allowed!";
-	// 	}else{
-	// 		$data['access'] = "Not allowed.";
-	// 	}
-	// 	$this->load->view('header');
-	// 	$this->load->view('lobby/lobby', $data, FALSE);	
-	// 	$this->load->view('footer');
-
-	// }
-
-
 
 	function dashboard()
 	{
@@ -333,6 +309,34 @@ class Event extends CI_Controller
 			}
 		}
 		
+
+	}
+
+	function process_vote(){
+
+		if ($this->input->is_ajax_request()) {
+			//AJAX request
+			$vote_type = $this->input->post('vote_type');
+			$t_id	   = $this->input->post('c_track_id');
+			$c_event_id= $this->input->post('c_event_id');
+
+			
+			// error checking
+			if (!isset($vote_type) || !isset($t_id) || !isset($c_event_id)) {
+				
+				return false;
+			}
+
+			$this->Event_model->update_track_vote($c_event_id, $t_id, $vote_type);
+
+
+		}else{
+
+			// do nothing
+
+		}
+
+
 
 	}
 

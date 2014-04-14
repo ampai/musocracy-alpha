@@ -62,6 +62,7 @@ class Event_model extends CI_Model {
 			return false;
 		}
 
+		$this->db->order_by("ordering", "desc");
 		$query = $this->db->get_where($this->event_tracks_table, array("event_id" => $e_id));
 
 		if ($query->num_rows() > 0) {
@@ -73,9 +74,52 @@ class Event_model extends CI_Model {
 
 	}
 
+	// For a given event_id, track_id, increment either the upvote or downvote
+	function update_track_vote($e_id, $t_uri, $v_type){
+		// vote type definition
+		$vote_col = "upvote"; //default
 
-	function update_track_vote($e_id,$t_uri){
+		if (strcmp($v_type, 'up') == 0) {
+			$vote_col = "upvotes";
+		}else{
+			$vote_col = "downvotes";
+		}
 
+		// where clause definition
+		$where_clause = arraY(
+					'event_id' => $e_id,
+					'track_uri' => $t_uri
+				);
+
+		
+		// update the table
+		$this->db->set($vote_col, $vote_col." + 1", false);
+		$this->db->where($where_clause);
+		$this->db->update($this->event_tracks_table);
+
+
+
+		// ordering only changes if a vote has been cast, so
+		// determine the new ordering
+		// a bit of a kludge, but let's get this project done...
+
+		// define ordering column value
+		// need to fetch the values of the upvote and downvote fields
+		// then let ordering.val = upvote.val - downvote.val 
+		// then set ordering field
+		$ordering_val = 0;
+		$temp_query = $this->db->get_where($this->event_tracks_table, $where_clause, 1, 0);
+		if ($temp_query->num_rows() > 0) {
+			$temp_query_arr = $temp_query->row_array();
+			$upvotes = $temp_query_arr['upvotes'];
+			$downvotes = $temp_query_arr['downvotes'];
+
+			$ordering_val = $upvotes - $downvotes;
+		}
+		
+		$this->db->set('ordering', $ordering_val, true);
+		$this->db->where($where_clause);
+		$this->db->update($this->event_tracks_table);
 
 
 	}
@@ -208,6 +252,8 @@ class Event_model extends CI_Model {
 		}
 
 	}
+
+
 
 }
 
