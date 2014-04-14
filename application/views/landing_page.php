@@ -28,8 +28,8 @@
                             <label for="nickname">Your Name</label>
                                 <input id="nickname" type="text" class="form-control" placeholder="Nickname"> 
                             <label for="accesscode">Key</label>
-                                <input id="accesscode" type="text" class="form-control" placeholder="Access Code" style="text-transform: uppercase; margin-bottom: 15px;">
-                            <button class="btn btn-success btn-block">Go To Event!</button>
+                                <input id="accesscode" name="accesscode" type="text" class="form-control" placeholder="Access Code" style="text-transform: uppercase; margin-bottom: 15px;">
+                            <button class="btn btn-success btn-block" id="guest-access">Go To Event!</button>
                         </div>
                         
                     </div>
@@ -154,6 +154,13 @@
     </div> -->
     <!-- /Call to Action -->
 
+
+<script type="text/javascript">
+    
+
+
+    
+</script>
 
  <script>
    // Smooth scrolling: http://css-tricks.com/snippets/jquery/smooth-scrolling/

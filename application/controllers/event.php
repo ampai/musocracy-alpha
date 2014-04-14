@@ -34,6 +34,15 @@ class Event extends CI_Controller
 	}
 
 
+	function fooling_tank_auth(){
+
+		$uname = $this->session->userdata('username');
+
+		echo $uname;
+
+
+	}
+
 	function create_event()
 	{
 		// AJAX processing for an event

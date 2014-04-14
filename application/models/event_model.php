@@ -93,7 +93,7 @@ class Event_model extends CI_Model {
 
 		
 		// update the table
-		$this->db->set($vote_col, $vote_col." + 1", false);
+		$this->db->set($vote_col, $vote_col." + 1", false); 
 		$this->db->where($where_clause);
 		$this->db->update($this->event_tracks_table);
 
@@ -149,21 +149,18 @@ class Event_model extends CI_Model {
 
 	}
 
+	// get event_id of an event based on provided access code
+	function get_event_id_by_code($event_code){
+		$e_id_out = 0;
+		
 
-	function let_me_in($event_name, $event_code){
-		$ret = false;
-		// check if the code matches the event name, return 
-
-		$query = $this->db->get_where('events', array('name' => $event_name, 'access_code' => $event_code));
-		if ($query->num_rows == 1) {
-			//even if two events have the same name, the access key is unique across all keys
-			// 37^5 possible access keys, need to check distribution of keys to see collisions
-
-			$ret = true; 
+		$query = $this->db->get_where($event_table, array('access_code' => $event_code));
+		if ($query->num_rows > 0) {
+			$e_id_out = $query->row_array()[0]['event_id']; 
 
 		}
 
-		return $ret;
+		return $e_id_out;
 	}
 
 	function get_all_event_names(){
